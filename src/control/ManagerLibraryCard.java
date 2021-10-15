@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class ManagerLibraryCard {
     ArrayList<LibraryCard> libraryCardArrayList = new ArrayList<>();
     ManagerStudent managerStudent = new ManagerStudent();
+    LibraryCardFile libraryCardFile = LibraryCardFile.getInstance();
 
     public ManagerLibraryCard() {
     }
@@ -46,7 +47,7 @@ public class ManagerLibraryCard {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-        LibraryCardFile.writeFile(getLibraryCardArrayList());
+        libraryCardFile.writeFile(getLibraryCardArrayList());
     }
 
     //sửa card theo code
@@ -61,7 +62,7 @@ public class ManagerLibraryCard {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-        LibraryCardFile.writeFile(getLibraryCardArrayList());
+        libraryCardFile.writeFile(getLibraryCardArrayList());
     }
 
     //xóa card theo code
@@ -76,7 +77,7 @@ public class ManagerLibraryCard {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-        LibraryCardFile.writeFile(getLibraryCardArrayList());
+        libraryCardFile.writeFile(getLibraryCardArrayList());
     }
 
     //showAll danh sách card

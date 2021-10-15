@@ -8,8 +8,19 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class StudentFile {
+    private static StudentFile studentFile;
+
+    private StudentFile() {
+    }
+    //Singleton
+    public static StudentFile getInstance(){
+        if(studentFile == null){
+            studentFile = new StudentFile();
+        }
+        return studentFile;
+    }
     //đọc file
-    public static ArrayList<Student> readFile() throws IOException, ClassNotFoundException {
+    public ArrayList<Student> readFile() throws IOException, ClassNotFoundException {
         File file = new File("studentList.dat");
         if (!file.exists()){
             file.createNewFile();
@@ -27,7 +38,7 @@ public class StudentFile {
     }
 
     //ghì file
-    public static void writeFile(ArrayList<Student> students) throws IOException{
+    public void writeFile(ArrayList<Student> students) throws IOException{
         FileOutputStream fileOutputStream = new FileOutputStream("studentList.dat");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(students);

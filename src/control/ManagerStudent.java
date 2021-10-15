@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class ManagerStudent {
     ArrayList<Student> studentArrayList = new ArrayList<>();
+    StudentFile studentFile = StudentFile.getInstance();
 
     public ManagerStudent() {
     }
@@ -27,7 +28,7 @@ public class ManagerStudent {
     ///thêm sinh viên
     public void addStudent(Student student) throws IOException {
         studentArrayList.add(student);
-        StudentFile.writeFile(getStudentArrayList());
+        studentFile.writeFile(studentArrayList);
     }
 
     //sửa thông tin sinh viên theo code
@@ -42,7 +43,7 @@ public class ManagerStudent {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-        StudentFile.writeFile(getStudentArrayList());
+        studentFile.writeFile(studentArrayList);
     }
 
     //xóa thông tin sinh viên theo code
@@ -57,7 +58,7 @@ public class ManagerStudent {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-        StudentFile.writeFile(getStudentArrayList());
+        studentFile.writeFile(studentArrayList);
     }
 
     //showAll danh sách sinh viên

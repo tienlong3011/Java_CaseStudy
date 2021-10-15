@@ -6,7 +6,18 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class LibraryCardFile {
-    public static ArrayList<LibraryCard> readFile() throws IOException, ClassNotFoundException {
+    private static LibraryCardFile libraryCardFile;
+
+    private LibraryCardFile() {
+    }
+    //Singleton
+    public static LibraryCardFile getInstance(){
+        if(libraryCardFile == null){
+            libraryCardFile = new LibraryCardFile();
+        }
+        return libraryCardFile;
+    }
+    public ArrayList<LibraryCard> readFile() throws IOException, ClassNotFoundException {
         File file = new File("libraryCardList.dat");
         if (!file.exists()){
             file.createNewFile();
@@ -22,7 +33,7 @@ public class LibraryCardFile {
         }
         else return new ArrayList<>();
     }
-    public static void writeFile(ArrayList<LibraryCard> students) throws IOException{
+    public void writeFile(ArrayList<LibraryCard> students) throws IOException{
         FileOutputStream fileOutputStream = new FileOutputStream("libraryCardList.dat");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(students);

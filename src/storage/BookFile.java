@@ -7,7 +7,19 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class BookFile {
-    public static ArrayList<Book> readFile() throws IOException, ClassNotFoundException {
+    private static BookFile bookFile;
+
+    private BookFile() {
+    }
+    //Singleton
+    public static BookFile getInstance(){
+        if(bookFile == null){
+            bookFile = new BookFile();
+        }
+        return bookFile;
+    }
+
+    public ArrayList<Book> readFile() throws IOException, ClassNotFoundException {
         File file = new File("bookList.dat");
         if (!file.exists()){
             file.createNewFile();
@@ -23,7 +35,7 @@ public class BookFile {
         }
         else return new ArrayList<>();
     }
-    public static void writeFile(ArrayList<Book> students) throws IOException{
+    public void writeFile(ArrayList<Book> students) throws IOException{
         FileOutputStream fileOutputStream = new FileOutputStream("bookList.dat");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(students);

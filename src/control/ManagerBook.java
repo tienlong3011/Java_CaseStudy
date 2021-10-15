@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ManagerBook {
     ArrayList<Book> bookArrayList = new ArrayList<>();
-
+    BookFile bookFile = BookFile.getInstance();
     public ManagerBook() {
     }
 
@@ -27,7 +27,7 @@ public class ManagerBook {
     ///thêm sách
     public void addBook(Book student) throws IOException {
         bookArrayList.add(student);
-        BookFile.writeFile(getBookArrayList());
+        bookFile.writeFile(bookArrayList);
     }
 
 
@@ -43,7 +43,7 @@ public class ManagerBook {
         } else {
             System.out.println("Không tìm thấy sách");
         }
-        BookFile.writeFile(getBookArrayList());
+        bookFile.writeFile(bookArrayList);
     }
 
     //xóa sách theo code
@@ -58,7 +58,7 @@ public class ManagerBook {
         } else {
             System.out.println("Không tìm thấy sách");
         }
-        BookFile.writeFile(getBookArrayList());
+        bookFile.writeFile(bookArrayList);
     }
 
     //showAll danh sách sách
