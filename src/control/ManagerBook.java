@@ -36,7 +36,11 @@ public class ManagerBook {
     ///thêm sách
     public void addBook(Book student){
         bookArrayList.add(student);
-//        bookFile.writeFile(bookArrayList);
+        try {
+            bookFile.writeFile(bookArrayList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -52,7 +56,11 @@ public class ManagerBook {
         } else {
             System.out.println("Không tìm thấy sách");
         }
-//        bookFile.writeFile(bookArrayList);
+        try {
+            bookFile.writeFile(bookArrayList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //xóa sách theo code
@@ -67,7 +75,11 @@ public class ManagerBook {
         } else {
             System.out.println("Không tìm thấy sách");
         }
-//        bookFile.writeFile(bookArrayList);
+        try {
+            bookFile.writeFile(bookArrayList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //showAll danh sách sách

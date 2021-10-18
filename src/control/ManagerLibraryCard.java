@@ -53,7 +53,12 @@ public class ManagerLibraryCard {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-//        libraryCardFile.writeFile(getLibraryCardArrayList());
+
+        try {
+            libraryCardFile.writeFile(getLibraryCardArrayList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //xóa card theo code
@@ -68,7 +73,11 @@ public class ManagerLibraryCard {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-//        libraryCardFile.writeFile(getLibraryCardArrayList());
+        try {
+            libraryCardFile.writeFile(getLibraryCardArrayList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //showAll danh sách card

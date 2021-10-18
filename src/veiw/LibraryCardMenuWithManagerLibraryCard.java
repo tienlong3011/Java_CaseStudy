@@ -5,21 +5,31 @@ import control.ManagerLibraryCard;
 import control.ManagerStudent;
 import model.Book;
 import model.LibraryCard;
+import storage.LibraryCardFile;
 
 
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class LibraryCardMenuWithManagerLibraryCard {
+    final static  Scanner scanner = new Scanner(System.in); //String
+    final static  Scanner scanner1 = new Scanner(System.in); //int
+    ManagerLibraryCard managerLibraryCard = new ManagerLibraryCard();
+
 
     ManagerBook managerBook = ManagerBook.getInstance();
     ManagerStudent managerStudent = ManagerStudent.getInstance();
-    ManagerLibraryCard managerLibraryCard = new ManagerLibraryCard();
-    final static  Scanner scanner = new Scanner(System.in); //String
-    final static  Scanner scanner1 = new Scanner(System.in); //int
+
 
 
     public void runLibraryCard(){
+        try {
+            managerLibraryCard.setLibraryCardArrayList(LibraryCardFile.getInstance().readFile());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         Scanner number = new Scanner(System.in);
 
@@ -66,7 +76,7 @@ public class LibraryCardMenuWithManagerLibraryCard {
     private void giveBookBack() {
         LibraryCard libraryCard = managerLibraryCard.searchLibraryCardByCodeStudent(inputCode());
         if(libraryCard != null){
-            LocalDate payDay = enterTheLoan();
+            LocalDate payDay = inputDates();
             boolean check = libraryCard.getBorrowedDate().isAfter(payDay);
             if(check){
                 libraryCard.setStatus(true);
@@ -85,6 +95,12 @@ public class LibraryCardMenuWithManagerLibraryCard {
         }
         assert libraryCard != null;
         System.out.println(libraryCard.show());
+
+        try {
+            managerLibraryCard.getLibraryCardFile().writeFile(managerLibraryCard.getLibraryCardArrayList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void borrowBooks() {
@@ -101,7 +117,7 @@ public class LibraryCardMenuWithManagerLibraryCard {
                         book.setQuantity(book.getQuantity() - 1);
                     }
                 }
-                libraryCard.setBorrowedDate(enterTheLoan());
+                libraryCard.setBorrowedDate(inputDates());
                 System.out.print("Nhập số ngày cần mượn: ");
                 int borrowedDays = scanner1.nextInt();
                 libraryCard.setBorrowedDays(borrowedDays);
@@ -125,6 +141,12 @@ public class LibraryCardMenuWithManagerLibraryCard {
             System.out.println("Không có thẻ thư viện");
         }
         System.out.println(libraryCard);
+
+        try {
+            managerLibraryCard.getLibraryCardFile().writeFile(managerLibraryCard.getLibraryCardArrayList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // tìm kiếm card
@@ -158,13 +180,13 @@ public class LibraryCardMenuWithManagerLibraryCard {
     }
 
     //thêm ngày mượn
-    public static LocalDate enterTheLoan() {
-        System.out.print("Năm mượn: ");
+    public static LocalDate inputDates() {
+        System.out.print("Năm: ");
         Scanner number = new Scanner(System.in);
         int year = number.nextInt();
-        System.out.print("Tháng mượn: ");
+        System.out.print("Tháng: ");
         int month = number.nextInt();
-        System.out.print("Ngày mượn: ");
+        System.out.print("Ngày: ");
         int day = number.nextInt();
         return LocalDate.of(year, month, day);
     }

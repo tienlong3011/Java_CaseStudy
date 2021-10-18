@@ -4,11 +4,13 @@ package veiw;
 import java.util.Scanner;
 
 public class MenuManager {
+
     public void runMenu() {
         StudentMenuWithManagerStudent studentMenuWithManagerStudent = new StudentMenuWithManagerStudent();
         BookMenuWithManagerBook bookMenuWithManagerBook = new BookMenuWithManagerBook();
         LibraryCardMenuWithManagerLibraryCard libraryCardMenuWithManagerLibraryCard = new LibraryCardMenuWithManagerLibraryCard();
         Scanner number = new Scanner(System.in);
+
 
         int choice = -1;
 

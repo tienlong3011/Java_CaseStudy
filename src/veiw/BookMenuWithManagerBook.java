@@ -2,13 +2,22 @@ package veiw;
 
 import control.ManagerBook;
 import model.Book;
+import storage.BookFile;
+import storage.StudentFile;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class BookMenuWithManagerBook {
     public void runBook(){
         Scanner number = new Scanner(System.in);
         ManagerBook managerBook = ManagerBook.getInstance();
+
+        try {
+            managerBook.setBookArrayList(BookFile.getInstance().readFile());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         int choice = -1;
 

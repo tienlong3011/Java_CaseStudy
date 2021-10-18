@@ -39,7 +39,11 @@ public class ManagerStudent {
     ///thêm sinh viên
     public void addStudent(Student student)  {
         studentArrayList.add(student);
-//        studentFile.writeFile(studentArrayList);
+        try {
+            studentFile.writeFile(studentArrayList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //sửa thông tin sinh viên theo code
@@ -50,7 +54,11 @@ public class ManagerStudent {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-//        studentFile.writeFile(studentArrayList);
+        try {
+            studentFile.writeFile(studentArrayList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -66,7 +74,11 @@ public class ManagerStudent {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-//        studentFile.writeFile(studentArrayList);
+        try {
+            studentFile.writeFile(studentArrayList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //showAll danh sách sinh viên

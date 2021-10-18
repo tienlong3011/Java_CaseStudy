@@ -2,6 +2,7 @@ package veiw;
 
 import control.ManagerStudent;
 import model.Student;
+import storage.StudentFile;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,7 +11,11 @@ public class StudentMenuWithManagerStudent {
     public void runStudent(){
         Scanner number = new Scanner(System.in);
         ManagerStudent managerStudent = ManagerStudent.getInstance();
-
+        try {
+            managerStudent.setStudentArrayList(StudentFile.getInstance().readFile());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         int choice = -1;
 
         while (choice != 0){
