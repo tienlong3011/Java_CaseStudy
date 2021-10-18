@@ -9,17 +9,18 @@ public class LibraryCard implements Serializable {
     private Book book;
     private LocalDate borrowedDate;
     private int borrowedDays;
-
+    private boolean status = true;
 
 
     public LibraryCard() {
     }
 
-    public LibraryCard(Student student, Book book, LocalDate borrowedDate, int borrowedDays) {
+    public LibraryCard(Student student, Book book, LocalDate borrowedDate, int borrowedDays,boolean status) {
         this.student = student;
         this.book = book;
         this.borrowedDate = borrowedDate.plusDays(borrowedDays);
         this.borrowedDays = borrowedDays;
+        this.status = status;
     }
 
 
@@ -59,13 +60,27 @@ public class LibraryCard implements Serializable {
         this.borrowedDays = borrowedDays;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return student +
                 ", " +
                 book +
-                ", borrowedDate= " + borrowedDate +
-                ", borrowedDays= " + borrowedDays
-                ;
+                ", Ngày mượn: " + borrowedDate +
+                ", Thời hạn mượn: " + borrowedDays + " ngày"+
+                ", Trạng thái thẻ: " + status;
+
+    }
+
+    public String show(){
+        return student +
+                ", Trạng thái thẻ: " + status;
     }
 }

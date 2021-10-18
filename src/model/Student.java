@@ -62,11 +62,12 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "name= " + name + '\'' +
-                ", studentCode= " + studentCode + '\'' +
-                ", yearOfBirth='" + yearOfBirth + '\'' +
-                ", class1= " + class1 + '\'' +
-                ", balance= " + balance +
-                '}';
+        return "Họ và tên: " + name +
+                ", Mã Sinh viên: " + studentCode +
+                ", Năm sinh: " + yearOfBirth +
+                ", Lớp: " + class1 +
+                ", Số tiền: " + balance;
+
+
     }
 }

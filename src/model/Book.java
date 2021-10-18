@@ -42,9 +42,9 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "bookCode= " + bookCode +
-                ", bookName= " + bookName +
-                ", quantity= " + quantity
+        return "Mã sách: " + bookCode +
+                ", Tên sách: " + bookName +
+                ", Số lượng: " + quantity
                 ;
     }
 }

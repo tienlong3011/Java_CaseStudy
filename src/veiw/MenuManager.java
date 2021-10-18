@@ -1,9 +1,10 @@
 package veiw;
 
+
 import java.util.Scanner;
 
-public class Test {
-    public static void main(String[] args) {
+public class MenuManager {
+    public void runMenu() {
         StudentMenuWithManagerStudent studentMenuWithManagerStudent = new StudentMenuWithManagerStudent();
         BookMenuWithManagerBook bookMenuWithManagerBook = new BookMenuWithManagerBook();
         LibraryCardMenuWithManagerLibraryCard libraryCardMenuWithManagerLibraryCard = new LibraryCardMenuWithManagerLibraryCard();
@@ -30,6 +31,8 @@ public class Test {
                 case 3:
                     libraryCardMenuWithManagerLibraryCard.runLibraryCard();
                     break;
+                case 4:
+                    System.exit(0);
             }
         }
 
