@@ -1,10 +1,22 @@
 package veiw;
 
 
+import control.ManagerStudent;
+
 import java.util.Scanner;
 
 public class MenuManager {
 
+    private MenuManager() {
+    }
+
+    public static MenuManager getInstance() {
+        return MenuManager.MenuManagerHelper.INSTANCE;
+    }
+
+    private static class MenuManagerHelper{
+        private static final MenuManager INSTANCE = new MenuManager();
+    }
     public void runMenu() {
         StudentMenuWithManagerStudent studentMenuWithManagerStudent = new StudentMenuWithManagerStudent();
         BookMenuWithManagerBook bookMenuWithManagerBook = new BookMenuWithManagerBook();
@@ -20,7 +32,7 @@ public class MenuManager {
             System.out.println("1. Quản lý sinh viên");
             System.out.println("2. Quản lý sách");
             System.out.println("3. Quản lý thẻ thư viện");
-            System.out.println("4. Exit");
+            System.out.println("0. Quay lại");
 
             choice = number.nextInt();
             switch (choice){
@@ -33,8 +45,7 @@ public class MenuManager {
                 case 3:
                     libraryCardMenuWithManagerLibraryCard.runLibraryCard();
                     break;
-                case 4:
-                    System.exit(0);
+                case 0:
             }
         }
 

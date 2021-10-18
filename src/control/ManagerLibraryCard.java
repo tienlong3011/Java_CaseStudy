@@ -13,7 +13,6 @@ public class ManagerLibraryCard {
 
     private static final ManagerStudent MANAGER_STUDENT = ManagerStudent.getInstance();
 
-    private static final ManagerBook MANAGER_BOOK = ManagerBook.getInstance();
 
     public ManagerLibraryCard() {
     }

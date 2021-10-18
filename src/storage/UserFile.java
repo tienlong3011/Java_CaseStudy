@@ -1,29 +1,25 @@
 package storage;
 
-
-
-
-
-import model.Student;
+import model.User;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class StudentFile {
-    private static StudentFile studentFile;
+public class UserFile {
+    private static UserFile userFile;
 
-    private StudentFile() {
+    private UserFile() {
     }
     //Singleton
-    public static StudentFile getInstance(){
-        if(studentFile == null){
-            studentFile = new StudentFile();
+    public static UserFile getInstance(){
+        if(userFile == null){
+            userFile = new UserFile();
         }
-        return studentFile;
+        return userFile;
     }
     //đọc file
-    public ArrayList<Student> readFile() throws IOException, ClassNotFoundException {
-        File file = new File("studentList.dat");
+    public ArrayList<User> readFile() throws IOException, ClassNotFoundException {
+        File file = new File("UserList.dat");
         if (!file.exists()){
             file.createNewFile();
         }
@@ -31,7 +27,7 @@ public class StudentFile {
             FileInputStream fileInputStream = new FileInputStream(file);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Object object = objectInputStream.readObject();
-            ArrayList<Student> list = (ArrayList<Student>)object;
+            ArrayList<User> list = (ArrayList<User>)object;
             objectInputStream.close();
             fileInputStream.close();
             return list;
@@ -40,10 +36,10 @@ public class StudentFile {
     }
 
     //ghì file
-    public void writeFile(ArrayList<Student> students) throws IOException{
-        FileOutputStream fileOutputStream = new FileOutputStream("studentList.dat");
+    public void writeFile(ArrayList<User> users) throws IOException{
+        FileOutputStream fileOutputStream = new FileOutputStream("UserList.dat");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(students);
+        objectOutputStream.writeObject(users);
         objectOutputStream.close();
         fileOutputStream.close();
     }
