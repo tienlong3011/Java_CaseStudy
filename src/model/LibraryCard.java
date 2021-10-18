@@ -9,7 +9,7 @@ public class LibraryCard implements Serializable {
     private Book book;
     private LocalDate borrowedDate;
     private int borrowedDays;
-    ;
+
 
 
     public LibraryCard() {

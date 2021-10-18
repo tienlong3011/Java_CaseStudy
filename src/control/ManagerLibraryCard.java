@@ -1,15 +1,11 @@
 package control;
 
-
-import model.Book;
 import model.LibraryCard;
 import model.Student;
 import storage.LibraryCardFile;
-
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class ManagerLibraryCard {
     ArrayList<LibraryCard> libraryCardArrayList = new ArrayList<>();
@@ -52,6 +48,7 @@ public class ManagerLibraryCard {
             }
             if (!check) {
                 libraryCardArrayList.add(new LibraryCard(student));
+                System.out.println("Tạo thẻ thành công");
             }
         } else {
             System.out.println("Không tìm thấy sinh viên");

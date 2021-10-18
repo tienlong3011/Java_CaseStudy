@@ -52,48 +52,72 @@ public class LibraryCardMenuWithManagerLibraryCard {
                     managerLibraryCard.showAllLibraryCard();
                     break;
                 case 5:
-                     LibraryCard libraryCard = managerLibraryCard.searchLibraryCardByCodeStudent(inputCode());
-                    if (libraryCard != null ) {
-                        if (libraryCard.getStudent().getBalance() >= 20) {
-                            managerBook.showAllBook();
-                            System.out.print("Nhập sách code sách: ");
-                            String codeBook = scanner.nextLine();
-                            Book book = managerBook.searchBookByCode(codeBook);
-                            for (int i = 0; i < managerBook.getBookArrayList().size(); i++) {
-                                if (managerBook.getBookArrayList().get(i).equals(book)) {
-                                    libraryCard.setBook(managerBook.getBookArrayList().get(i));
-                                    book.setQuantity(book.getQuantity() - 1);
-                                }
-                            }
-                            libraryCard.setBorrowedDate(enterTheLoan());
-                            System.out.print("Nhập số ngày cần mượn: ");
-                            int borrowedDays = scanner1.nextInt();
-                            libraryCard.setBorrowedDays(borrowedDays);
-                            //nếu mượn lâu thì trừ nhiều tiền
-                            if (borrowedDays <= 7) {
-                                libraryCard.getStudent().setBalance(libraryCard.getStudent().getBalance() - 5);
-                            } else if (borrowedDays <= 14) {
-                                libraryCard.getStudent().setBalance(libraryCard.getStudent().getBalance() - 10);
-                            } else if (borrowedDays <= 21) {
-                                libraryCard.getStudent().setBalance(libraryCard.getStudent().getBalance() - 15);
-                            } else {
-                                libraryCard.getStudent().setBalance(libraryCard.getStudent().getBalance() - 20);
-                            }
-
-                            System.out.println("Mượn sách thành công");
-                        }else {
-                            System.out.println("Bạn không đủ tiền. Vui lòng nạp tiền để tiếp tục!");
-                        }
-                    }else {
-                        System.out.println("Không có thẻ thư viện");
-                    }
+                    borrowBooks();
                     break;
                 case 6:
-//                    LibraryCard libraryCard1 = managerLibraryCard.searchLibraryCardByCodeStudent(inputCode());
-//                    if(libraryCard != null){
-//
-//                    }
+                    LibraryCard libraryCard = managerLibraryCard.searchLibraryCardByCodeStudent(inputCode());
+                    if(libraryCard != null){
+                        LocalDate payDay = enterTheLoan();
+                        boolean check = libraryCard.getBorrowedDate().isAfter(payDay);
+                        if(check){
+                            libraryCard.getBook().setBookCode(null);
+                            libraryCard.getBook().setBookName(null);
+                            libraryCard.setBorrowedDate(null);
+                            libraryCard.setBorrowedDays(0);
+                            libraryCard.getStudent().setBalance(libraryCard.getStudent().getBalance() - 5);
+                            System.out.println("Trả sách quá hạn.Bạn bị phạt thêm 5 đồng!");
+                        } else {
+                            libraryCard.getBook().setBookCode(null);
+                            libraryCard.getBook().setBookName(null);
+                            libraryCard.setBorrowedDate(null);
+                            libraryCard.setBorrowedDays(0);
+                            System.out.println("Trả đúng hạn");
+                        }
+                    }else {
+                        System.out.println("Không có sinh viên");
+                    }
+                    managerLibraryCard.showAllLibraryCard();
+                    break;
+                case 0:
             }
+        }
+    }
+
+    private void borrowBooks() {
+        LibraryCard libraryCard = managerLibraryCard.searchLibraryCardByCodeStudent(inputCode());
+        if (libraryCard != null ) {
+            if (libraryCard.getStudent().getBalance() >= 20) {
+                managerBook.showAllBook();
+                System.out.print("Nhập sách code sách: ");
+                String codeBook = scanner.nextLine();
+                Book book = managerBook.searchBookByCode(codeBook);
+                for (int i = 0; i < managerBook.getBookArrayList().size(); i++) {
+                    if (managerBook.getBookArrayList().get(i).equals(book)) {
+                        libraryCard.setBook(managerBook.getBookArrayList().get(i));
+                        book.setQuantity(book.getQuantity() - 1);
+                    }
+                }
+                libraryCard.setBorrowedDate(enterTheLoan());
+                System.out.print("Nhập số ngày cần mượn: ");
+                int borrowedDays = scanner1.nextInt();
+                libraryCard.setBorrowedDays(borrowedDays);
+                //nếu mượn lâu thì trừ nhiều tiền
+                if (borrowedDays <= 7) {
+                    libraryCard.getStudent().setBalance(libraryCard.getStudent().getBalance() - 5);
+                } else if (borrowedDays <= 14) {
+                    libraryCard.getStudent().setBalance(libraryCard.getStudent().getBalance() - 10);
+                } else if (borrowedDays <= 21) {
+                    libraryCard.getStudent().setBalance(libraryCard.getStudent().getBalance() - 15);
+                } else {
+                    libraryCard.getStudent().setBalance(libraryCard.getStudent().getBalance() - 20);
+                }
+
+                System.out.println("Mượn sách thành công");
+            }else {
+                System.out.println("Bạn không đủ tiền. Vui lòng nạp tiền để tiếp tục!");
+            }
+        }else {
+            System.out.println("Không có thẻ thư viện");
         }
     }
 
@@ -106,26 +130,6 @@ public class LibraryCardMenuWithManagerLibraryCard {
             System.out.println("Không có thẻ thư viện");
         }
     }
-
-    private void muonsach(LibraryCard libraryCard){
-        if(libraryCard != null){
-            managerBook.showAllBook();
-            System.out.println("Nhập sách code sách");
-            String codeBook = scanner.nextLine();
-            for (int i = 0; i < managerBook.getBookArrayList().size(); i++) {
-                if(managerBook.getBookArrayList().get(i).getBookCode().equalsIgnoreCase(codeBook)){
-//                    libraryCard.getBook().add(managerBook.getBookArrayList().get(i));
-                    libraryCard.setBorrowedDate(LocalDate.of(2020,10,17));
-//                    libraryCard.setPayDate(LocalDate.of(2020,12,17));
-                }
-            }
-        }
-        else {
-            System.out.println("không thấy");
-        }
-        managerLibraryCard.showAllLibraryCard();
-    }
-
 
 
     //xóa thẻ
