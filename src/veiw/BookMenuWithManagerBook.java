@@ -3,13 +3,12 @@ package veiw;
 import control.ManagerBook;
 import model.Book;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class BookMenuWithManagerBook {
     public void runBook(){
         Scanner number = new Scanner(System.in);
-        ManagerBook managerBook = new ManagerBook();
+        ManagerBook managerBook = ManagerBook.getInstance();
 
         int choice = -1;
 
@@ -17,7 +16,7 @@ public class BookMenuWithManagerBook {
             System.out.println("--------Quản lý sách thư viện--------");
             System.out.println("1. Thêm sách");
             System.out.println("2. Sửa thông tin sách");
-            System.out.println("3. Xóa sinh sách");
+            System.out.println("3. Xóa sách");
             System.out.println("4. Tìm kiếm theo mã sách");
             System.out.println("5. Dách sách Sách");
             System.out.println("0. Quay lại");
@@ -35,7 +34,7 @@ public class BookMenuWithManagerBook {
                     removeBookByCode(managerBook);
                     break;
                 case 4:
-                    managerBook.searchBookByCode(inputCode());
+                    System.out.println(managerBook.searchBookByCode(inputCode()));
                     break;
                 case 5:
                     managerBook.showAllBook();
@@ -48,29 +47,17 @@ public class BookMenuWithManagerBook {
 
     //xóa sách
     private void removeBookByCode(ManagerBook managerBook) {
-        try {
             managerBook.removeBook(inputCode());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     //sửa sách theo code
     private void editBookByCode(ManagerBook managerBook) {
-        try {
             managerBook.editStudent(inputCode(),addBook());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     //thêm sách
     private void inputBook(ManagerBook managerBook) {
-        try {
             managerBook.addBook(addBook());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static Book addBook() {
@@ -84,7 +71,7 @@ public class BookMenuWithManagerBook {
         bookName = string.nextLine();
         System.out.print("Nhập số lượng sách: ");
         quantity = inputNumber.nextInt();
-        return new Book(bookCode, bookName,quantity,true);
+        return new Book(bookCode, bookName,quantity);
     }
 
     //nhập code sách

@@ -1,6 +1,7 @@
 package control;
 
 
+import model.Book;
 import model.LibraryCard;
 import model.Student;
 import storage.LibraryCardFile;
@@ -8,18 +9,17 @@ import storage.LibraryCardFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ManagerLibraryCard {
     ArrayList<LibraryCard> libraryCardArrayList = new ArrayList<>();
-    ManagerStudent managerStudent = new ManagerStudent();
     LibraryCardFile libraryCardFile = LibraryCardFile.getInstance();
 
-    public ManagerLibraryCard() {
-    }
+    private static final ManagerStudent MANAGER_STUDENT = ManagerStudent.getInstance();
 
-    public ManagerLibraryCard(ArrayList<LibraryCard> libraryCardArrayList, ManagerStudent managerStudent) {
-        this.libraryCardArrayList = libraryCardArrayList;
-        this.managerStudent = managerStudent;
+    private static final ManagerBook MANAGER_BOOK = ManagerBook.getInstance();
+
+    public ManagerLibraryCard() {
     }
 
     public ArrayList<LibraryCard> getLibraryCardArrayList() {
@@ -30,44 +30,38 @@ public class ManagerLibraryCard {
         this.libraryCardArrayList = libraryCardArrayList;
     }
 
-    public ManagerStudent getManagerStudent() {
-        return managerStudent;
+    public LibraryCardFile getLibraryCardFile() {
+        return libraryCardFile;
     }
 
-    public void setManagerStudent(ManagerStudent managerStudent) {
-        this.managerStudent = managerStudent;
+    public void setLibraryCardFile(LibraryCardFile libraryCardFile) {
+        this.libraryCardFile = libraryCardFile;
     }
 
     //thêm card theo code
-    //xử lý phần LibraryCard libraryCard
-    public void addLibraryCard(String code, LibraryCard newLibraryCard) throws IOException {
-        Student student = managerStudent.searchStudentByCode(code);
+    public void addLibraryCard(String code) {
+        Student student = MANAGER_STUDENT.searchStudentByCode(code);
+        boolean check = false;
         if (student != null) {
-            libraryCardArrayList.add(newLibraryCard);
-        } else {
-            System.out.println("Không tìm thấy sinh viên");
-        }
-        libraryCardFile.writeFile(getLibraryCardArrayList());
-    }
 
-    //sửa card theo code
-    public void editLibraryCard(String code, LibraryCard newLibraryCard) throws IOException {
-        Student student = managerStudent.searchStudentByCode(code);
-           if (student != null) {
-            for (int i = 0; i < libraryCardArrayList.size(); i++) {
-                if (libraryCardArrayList.get(i).getStudent().equals(student)) {
-                    libraryCardArrayList.set(i, newLibraryCard);
+            for (LibraryCard libraryCard : libraryCardArrayList) {
+                if (libraryCard.getStudent().getStudentCode().equalsIgnoreCase(code)) {
+                    check = true;
+                    System.out.println("Sinh viên đã có thẻ thư viện");
                 }
+            }
+            if (!check) {
+                libraryCardArrayList.add(new LibraryCard(student));
             }
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-        libraryCardFile.writeFile(getLibraryCardArrayList());
+//        libraryCardFile.writeFile(getLibraryCardArrayList());
     }
 
     //xóa card theo code
-    public void removeLibraryCard(String code) throws IOException {
-        Student student = managerStudent.searchStudentByCode(code);
+    public void removeLibraryCard(String code) {
+        Student student = MANAGER_STUDENT.searchStudentByCode(code);
         if (student != null) {
             for (int i = 0; i < libraryCardArrayList.size(); i++) {
                 if (libraryCardArrayList.get(i).getStudent().equals(student)) {
@@ -77,19 +71,19 @@ public class ManagerLibraryCard {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-        libraryCardFile.writeFile(getLibraryCardArrayList());
+//        libraryCardFile.writeFile(getLibraryCardArrayList());
     }
 
     //showAll danh sách card
-    public void showAllLibraryCard(){
-        for (LibraryCard libraryCard: libraryCardArrayList) {
+    public void showAllLibraryCard() {
+        for (LibraryCard libraryCard : libraryCardArrayList) {
             System.out.println(libraryCard);
         }
     }
 
     //tìm kiếm card theo code
-    public LibraryCard searchLibraryCardByCodeStudent(String code){
-        Student student = managerStudent.searchStudentByCode(code);
+    public LibraryCard searchLibraryCardByCodeStudent(String code) {
+        Student student = MANAGER_STUDENT.searchStudentByCode(code);
         for (LibraryCard libraryCard : libraryCardArrayList) {
             if (libraryCard.getStudent().equals(student)) {
                 return libraryCard;
@@ -97,4 +91,7 @@ public class ManagerLibraryCard {
         }
         return null;
     }
+
+
+
 }

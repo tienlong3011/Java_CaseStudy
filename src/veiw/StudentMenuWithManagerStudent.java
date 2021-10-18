@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class StudentMenuWithManagerStudent {
     public void runStudent(){
         Scanner number = new Scanner(System.in);
-        ManagerStudent managerStudent = new ManagerStudent();
+        ManagerStudent managerStudent = ManagerStudent.getInstance();
 
         int choice = -1;
 
@@ -35,7 +35,7 @@ public class StudentMenuWithManagerStudent {
                     removeStudent(managerStudent);
                     break;
                 case 4:
-                    managerStudent.searchStudentByCode(inputCode());
+                    System.out.println(managerStudent.searchStudentByCode(inputCode()));
                     break;
                 case 5:
                     managerStudent.showAllStudent();
@@ -47,38 +47,30 @@ public class StudentMenuWithManagerStudent {
 
     //xóa sinh viên
     private void removeStudent(ManagerStudent managerStudent) {
-        try {
             managerStudent.removeStudent(inputCode());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
     //sửa thông tin
     private void editStudent(ManagerStudent managerStudent) {
-        try {
-            managerStudent.editStudent(inputCode(),addStudent());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            managerStudent.editStudent(inputCode());
+
     }
 
     //tạo mới sinh viên
     private void inputStudent(ManagerStudent managerStudent) {
-        try {
             managerStudent.addStudent(addStudent());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
-    private static Student addStudent() {
+    public static Student addStudent() {
         Scanner string = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String nameStudent;
         String yearOfBirth;
         String codeStudent;
         String class1;
+        double balance;
         System.out.print("Nhập tên sinh viên: ");
         nameStudent = string.nextLine();
         System.out.print("Nhập mã sinh viên: ");
@@ -87,7 +79,9 @@ public class StudentMenuWithManagerStudent {
         yearOfBirth = string.nextLine();
         System.out.print("Nhập tên lớp: ");
         class1 = string.nextLine();
-        return new Student(nameStudent,codeStudent,yearOfBirth,class1);
+        System.out.print("Nhập số tiền hiện có: ");
+        balance = sc.nextDouble();
+        return new Student(nameStudent,codeStudent,yearOfBirth,class1,balance);
     }
 
     //nhập code sinh viên

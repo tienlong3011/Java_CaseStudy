@@ -7,15 +7,17 @@ public class Student implements Serializable {
     private String studentCode;
     private String yearOfBirth;
     private String class1;
+    private double balance;
 
     public Student() {
     }
 
-    public Student(String name, String studentCode, String yearOfBirth, String class1) {
+    public Student(String name, String studentCode, String yearOfBirth, String class1, double balance) {
         this.name = name;
         this.studentCode = studentCode;
         this.yearOfBirth = yearOfBirth;
         this.class1 = class1;
+        this.balance = balance;
     }
 
     public String getName() {
@@ -50,12 +52,21 @@ public class Student implements Serializable {
         this.class1 = class1;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
-        return "name= " + name +
-                ", studentCode= " + studentCode +
-                ", dateOfBirth= " + yearOfBirth +
-                ", class= " + class1
-                ;
+        return "name= " + name + '\'' +
+                ", studentCode= " + studentCode + '\'' +
+                ", yearOfBirth='" + yearOfBirth + '\'' +
+                ", class1= " + class1 + '\'' +
+                ", balance= " + balance +
+                '}';
     }
 }

@@ -12,6 +12,15 @@ public class ManagerBook {
     public ManagerBook() {
     }
 
+    public static ManagerBook getInstance() {
+        return ManagerBook.ManagerBookHelper.INSTANCE;
+    }
+
+    private static class ManagerBookHelper{
+        private static final ManagerBook INSTANCE = new ManagerBook();
+    }
+
+
     public ManagerBook(ArrayList<Book> bookArrayList) {
         this.bookArrayList = bookArrayList;
     }
@@ -25,14 +34,14 @@ public class ManagerBook {
     }
 
     ///thêm sách
-    public void addBook(Book student) throws IOException {
+    public void addBook(Book student){
         bookArrayList.add(student);
-        bookFile.writeFile(bookArrayList);
+//        bookFile.writeFile(bookArrayList);
     }
 
 
     //sửa thông tin sách theo code
-    public void editStudent (String code, Book newBook) throws IOException {
+    public void editStudent (String code, Book newBook) {
         Book book = searchBookByCode(code);
         if(book != null){
             for (int i = 0; i < bookArrayList.size(); i++) {
@@ -43,11 +52,11 @@ public class ManagerBook {
         } else {
             System.out.println("Không tìm thấy sách");
         }
-        bookFile.writeFile(bookArrayList);
+//        bookFile.writeFile(bookArrayList);
     }
 
     //xóa sách theo code
-    public void removeBook(String code) throws IOException {
+    public void removeBook(String code) {
         Book book = searchBookByCode(code);
         if(book != null){
             for (int i = 0; i < bookArrayList.size(); i++) {
@@ -58,7 +67,7 @@ public class ManagerBook {
         } else {
             System.out.println("Không tìm thấy sách");
         }
-        bookFile.writeFile(bookArrayList);
+//        bookFile.writeFile(bookArrayList);
     }
 
     //showAll danh sách sách

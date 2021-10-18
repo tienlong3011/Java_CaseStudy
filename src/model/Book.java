@@ -6,16 +6,14 @@ public class Book implements Serializable {
     private String bookCode;
     private String bookName;
     private int quantity;
-    private boolean status = true;
 
     public Book() {
     }
 
-    public Book(String bookCode, String bookName, int quantity, boolean status) {
+    public Book(String bookCode, String bookName, int quantity) {
         this.bookCode = bookCode;
         this.bookName = bookName;
         this.quantity = quantity;
-        this.status = status;
     }
 
     public String getBookCode() {
@@ -42,20 +40,11 @@ public class Book implements Serializable {
         this.quantity = quantity;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return "bookCode= " + bookCode +
                 ", bookName= " + bookName +
-                ", quantity= " + quantity +
-                ", status= " + status
+                ", quantity= " + quantity
                 ;
     }
 }

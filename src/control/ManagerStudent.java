@@ -5,13 +5,24 @@ import storage.StudentFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ManagerStudent {
     ArrayList<Student> studentArrayList = new ArrayList<>();
     StudentFile studentFile = StudentFile.getInstance();
 
-    public ManagerStudent() {
+    private ManagerStudent() {
     }
+
+    public static ManagerStudent getInstance() {
+        return ManagerStudentHelper.INSTANCE;
+    }
+
+    private static class ManagerStudentHelper{
+        private static final ManagerStudent INSTANCE = new ManagerStudent();
+    }
+
+
 
     public ManagerStudent(ArrayList<Student> studentArrayList) {
         this.studentArrayList = studentArrayList;
@@ -26,28 +37,25 @@ public class ManagerStudent {
     }
 
     ///thêm sinh viên
-    public void addStudent(Student student) throws IOException {
+    public void addStudent(Student student)  {
         studentArrayList.add(student);
-        studentFile.writeFile(studentArrayList);
+//        studentFile.writeFile(studentArrayList);
     }
 
     //sửa thông tin sinh viên theo code
-    public void editStudent (String code, Student newStudent) throws IOException {
+    public void editStudent (String code) {
         Student student = searchStudentByCode(code);
         if(student != null){
-            for (int i = 0; i < studentArrayList.size(); i++) {
-                if(studentArrayList.get(i).equals(student)){
-                    studentArrayList.set(i,newStudent);
-                }
-            }
+            inputStudent(student);
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-        studentFile.writeFile(studentArrayList);
+//        studentFile.writeFile(studentArrayList);
     }
 
+
     //xóa thông tin sinh viên theo code
-    public void removeStudent(String code) throws IOException {
+    public void removeStudent(String code) {
         Student student = searchStudentByCode(code);
         if(student != null){
             for (int i = 0; i < studentArrayList.size(); i++) {
@@ -58,7 +66,7 @@ public class ManagerStudent {
         } else {
             System.out.println("Không tìm thấy sinh viên");
         }
-        studentFile.writeFile(studentArrayList);
+//        studentFile.writeFile(studentArrayList);
     }
 
     //showAll danh sách sinh viên
@@ -70,12 +78,14 @@ public class ManagerStudent {
 
     //tìm kiếm sinh viên theo code ( trả về object)
     public Student searchStudentByCode(String code){
-        for (Student student : studentArrayList) {
-            if (student.getStudentCode().equalsIgnoreCase(code)) {
-                return student;
+        Student student = null;
+        for (Student value : studentArrayList) {
+            if (value.getStudentCode().equalsIgnoreCase(code)) {
+                student = value;
+                break;
             }
         }
-       return null;
+        return student;
     }
 
     //tìm kiếm sinh viên theo code ( trả về index)
@@ -86,5 +96,26 @@ public class ManagerStudent {
             }
         }
         return -1;
+    }
+
+    //nhập lại student
+    private void inputStudent(Student student) {
+        Scanner sc = new Scanner(System.in);
+        Scanner sc1 = new Scanner(System.in);
+        String nameStudent,yearOfBirth,class1;
+        double balance;
+        System.out.println("Nhập lại thông tin sinh viên");
+        System.out.print("Nhập tên sinh viên: ");
+        nameStudent = sc.nextLine();
+        System.out.print("Nhập năm sinh: ");
+        yearOfBirth = sc.nextLine();
+        System.out.print("Nhập tên lớp: ");
+        class1 = sc.nextLine();
+        System.out.print("Nhập số tiền hiện có: ");
+        balance = sc1.nextDouble();
+        student.setName(nameStudent);
+        student.setYearOfBirth(yearOfBirth);
+        student.setClass1(class1);
+        student.setBalance(balance);
     }
 }

@@ -2,22 +2,29 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class LibraryCard implements Serializable {
     private Student student;
     private Book book;
     private LocalDate borrowedDate;
-    private LocalDate payDate;
+    private int borrowedDays;
+    ;
 
 
     public LibraryCard() {
     }
 
-    public LibraryCard(Student student, Book book, LocalDate borrowedDate, LocalDate payDate) {
+    public LibraryCard(Student student, Book book, LocalDate borrowedDate, int borrowedDays) {
         this.student = student;
         this.book = book;
-        this.borrowedDate = borrowedDate;
-        this.payDate = payDate;
+        this.borrowedDate = borrowedDate.plusDays(borrowedDays);
+        this.borrowedDays = borrowedDays;
+    }
+
+
+    public LibraryCard(Student student) {
+        this.student = student;
     }
 
     public Student getStudent() {
@@ -44,22 +51,21 @@ public class LibraryCard implements Serializable {
         this.borrowedDate = borrowedDate;
     }
 
-    public LocalDate getPayDate() {
-        return payDate;
+    public long getBorrowedDays() {
+        return borrowedDays;
     }
 
-    public void setPayDate(LocalDate payDate) {
-        this.payDate = payDate;
+    public void setBorrowedDays(int borrowedDays) {
+        this.borrowedDays = borrowedDays;
     }
 
     @Override
     public String toString() {
-        return "Card{" +
-                student +
+        return student +
                 ", " +
                 book +
                 ", borrowedDate= " + borrowedDate +
-                ", payDate= " + payDate +
-                '}';
+                ", borrowedDays= " + borrowedDays
+                ;
     }
 }
