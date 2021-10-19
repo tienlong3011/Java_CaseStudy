@@ -1,8 +1,5 @@
 package veiw;
 
-
-import control.ManagerStudent;
-
 import java.util.Scanner;
 
 public class MenuManager {

@@ -1,7 +1,6 @@
 package control;
 
 import model.User;
-import storage.StudentFile;
 import storage.UserFile;
 
 import java.io.IOException;
