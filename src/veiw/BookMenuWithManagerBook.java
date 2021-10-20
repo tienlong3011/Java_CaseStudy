@@ -3,12 +3,22 @@ package veiw;
 import control.ManagerBook;
 import model.Book;
 import storage.BookFile;
-import storage.StudentFile;
+
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class BookMenuWithManagerBook {
+    private BookMenuWithManagerBook() {
+    }
+
+    public static BookMenuWithManagerBook getInstance() {
+        return BookMenuWithManagerBook.BookMenuWithManagerBookHelper.INSTANCE;
+    }
+
+    private static class BookMenuWithManagerBookHelper{
+        private static final BookMenuWithManagerBook INSTANCE = new BookMenuWithManagerBook();
+    }
     public void runBook(){
         Scanner number = new Scanner(System.in);
         ManagerBook managerBook = ManagerBook.getInstance();

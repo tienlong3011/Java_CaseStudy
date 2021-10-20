@@ -5,8 +5,15 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String account;
     private String passWord;
+    private String role;
 
     public User() {
+    }
+
+    public User(String account, String passWord, String role) {
+        this.account = account;
+        this.passWord = passWord;
+        this.role = role;
     }
 
     public User(String account, String passWord) {
@@ -28,5 +35,13 @@ public class User implements Serializable {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

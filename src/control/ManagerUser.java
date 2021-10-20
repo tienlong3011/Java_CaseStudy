@@ -1,5 +1,6 @@
 package control;
 
+import model.Student;
 import model.User;
 import storage.UserFile;
 
@@ -9,9 +10,16 @@ import java.util.ArrayList;
 public class ManagerUser {
     ArrayList <User> userArrayList = new ArrayList<>();
     UserFile userFile = UserFile.getInstance();
-    public ManagerUser() {
+    private ManagerUser() {
     }
 
+    public static ManagerUser getInstance() {
+        return ManagerUser.ManagerUserHelper.INSTANCE;
+    }
+
+    private static class ManagerUserHelper{
+        private static final ManagerUser INSTANCE = new ManagerUser();
+    }
     public ManagerUser(ArrayList<User> userArrayList) {
         this.userArrayList = userArrayList;
     }
@@ -41,16 +49,17 @@ public class ManagerUser {
         userArrayList.set(index, user);
     }
 
-//    public int findIndex(String username) {
-//        int index = -1;
-//        for (int i = 0; i < userArrayList.size(); i++) {
-//            if (username.equals(userArrayList.get(i).getAccount())) {
-//                index = i;
-//                break;
-//            }
-//        }
-//        return index;
-//    }
+    public User findUser(String username) {
+            User user = null;
+            for (User value : userArrayList) {
+                if (value.getAccount().equalsIgnoreCase(username)) {
+                    user = value;
+                    break;
+                }
+            }
+            return user;
+        }
+
 
     public boolean isLogin(User userLogin) {
         for (User user : userArrayList) {

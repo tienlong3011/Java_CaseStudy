@@ -8,6 +8,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class StudentMenuWithManagerStudent {
+    private StudentMenuWithManagerStudent() {
+    }
+
+    public static StudentMenuWithManagerStudent getInstance() {
+        return StudentMenuWithManagerStudent.StudentMenuWithManagerStudentHelper.INSTANCE;
+    }
+
+    private static class StudentMenuWithManagerStudentHelper{
+        private static final StudentMenuWithManagerStudent INSTANCE = new StudentMenuWithManagerStudent();
+    }
+
     public void runStudent(){
         Scanner number = new Scanner(System.in);
         ManagerStudent managerStudent = ManagerStudent.getInstance();

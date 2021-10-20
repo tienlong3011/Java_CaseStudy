@@ -14,9 +14,16 @@ public class ManagerLibraryCard {
     private static final ManagerStudent MANAGER_STUDENT = ManagerStudent.getInstance();
 
 
-    public ManagerLibraryCard() {
+    private ManagerLibraryCard() {
     }
 
+    public static ManagerLibraryCard getInstance() {
+        return ManagerLibraryCard.ManagerLibraryCardHelper.INSTANCE;
+    }
+
+    private static class ManagerLibraryCardHelper{
+        private static final ManagerLibraryCard INSTANCE = new ManagerLibraryCard();
+    }
     public ArrayList<LibraryCard> getLibraryCardArrayList() {
         return libraryCardArrayList;
     }

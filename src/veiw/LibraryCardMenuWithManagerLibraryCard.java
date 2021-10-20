@@ -2,7 +2,6 @@ package veiw;
 
 import control.ManagerBook;
 import control.ManagerLibraryCard;
-import control.ManagerStudent;
 import model.Book;
 import model.LibraryCard;
 import storage.LibraryCardFile;
@@ -15,13 +14,19 @@ import java.util.Scanner;
 public class LibraryCardMenuWithManagerLibraryCard {
     final static Scanner scanner = new Scanner(System.in); //String
     final static Scanner scanner1 = new Scanner(System.in); //int
-    ManagerLibraryCard managerLibraryCard = new ManagerLibraryCard();
-
-
+    ManagerLibraryCard managerLibraryCard = ManagerLibraryCard.getInstance();
     ManagerBook managerBook = ManagerBook.getInstance();
-    ManagerStudent managerStudent = ManagerStudent.getInstance();
 
+    private LibraryCardMenuWithManagerLibraryCard() {
+    }
 
+    public static LibraryCardMenuWithManagerLibraryCard getInstance() {
+        return LibraryCardMenuWithManagerLibraryCard.LibraryCardMenuWithManagerLibraryCardHelper.INSTANCE;
+    }
+
+    private static class LibraryCardMenuWithManagerLibraryCardHelper{
+        private static final LibraryCardMenuWithManagerLibraryCard INSTANCE = new LibraryCardMenuWithManagerLibraryCard();
+    }
     public void runLibraryCard() {
         try {
             managerLibraryCard.setLibraryCardArrayList(LibraryCardFile.getInstance().readFile());
@@ -71,7 +76,7 @@ public class LibraryCardMenuWithManagerLibraryCard {
     }
 
     //trả sách
-    private void giveBookBack() {
+    public void giveBookBack() {
         LibraryCard libraryCard = managerLibraryCard.searchLibraryCardByCodeStudent(inputCode());
         if (libraryCard != null) {
             System.out.println("Nhập ngày, tháng, năm trả");
@@ -102,7 +107,7 @@ public class LibraryCardMenuWithManagerLibraryCard {
         }
     }
 
-    private void borrowBooks() {
+    public void borrowBooks() {
         LibraryCard libraryCard = managerLibraryCard.searchLibraryCardByCodeStudent(inputCode());
         if (libraryCard != null) {
             if (libraryCard.getStudent().getBalance() >= 20) {
