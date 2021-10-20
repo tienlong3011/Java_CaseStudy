@@ -23,6 +23,7 @@ public class MenuStudentManager {
     }
 
     public void runMenuStudent() {
+        LibraryCardMenuWithManagerLibraryCard libraryCardMenuWithManagerLibraryCard = LibraryCardMenuWithManagerLibraryCard.getInstance();
         ManagerBook managerBook = ManagerBook.getInstance();
         ManagerLibraryCard managerLibraryCard = ManagerLibraryCard.getInstance();
         ManagerStudent managerStudent = ManagerStudent.getInstance();
@@ -32,7 +33,6 @@ public class MenuStudentManager {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        LibraryCardMenuWithManagerLibraryCard libraryCardMenuWithManagerLibraryCard = LibraryCardMenuWithManagerLibraryCard.getInstance();
         Scanner number = new Scanner(System.in);
         //Đọc file book
         try {

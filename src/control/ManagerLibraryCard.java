@@ -95,9 +95,9 @@ public class ManagerLibraryCard {
 
     //tìm kiếm card theo code
     public LibraryCard searchLibraryCardByCodeStudent(String code) {
-        Student student = MANAGER_STUDENT.searchStudentByCode(code);
+//        Student student = MANAGER_STUDENT.searchStudentByCode(code);
         for (LibraryCard libraryCard : libraryCardArrayList) {
-            if (libraryCard.getStudent().equals(student)) {
+            if (libraryCard.getStudent().getStudentCode().equalsIgnoreCase(code)) {
                 return libraryCard;
             }
         }
