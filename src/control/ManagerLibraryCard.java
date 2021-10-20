@@ -92,11 +92,9 @@ public class ManagerLibraryCard {
             System.out.println(libraryCard);
         }
     }
-
     //tìm kiếm card theo code
     public LibraryCard searchLibraryCardByCodeStudent(String code) {
-//        Student student = MANAGER_STUDENT.searchStudentByCode(code);
-        for (LibraryCard libraryCard : libraryCardArrayList) {
+         for (LibraryCard libraryCard : libraryCardArrayList) {
             if (libraryCard.getStudent().getStudentCode().equalsIgnoreCase(code)) {
                 return libraryCard;
             }

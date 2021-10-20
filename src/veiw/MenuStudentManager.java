@@ -48,7 +48,6 @@ public class MenuStudentManager {
             e.printStackTrace();
         }
 
-        //đọc file student
 
 
         int choice = -1;
