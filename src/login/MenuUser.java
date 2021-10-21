@@ -47,7 +47,7 @@ public class MenuUser {
                     break;
                 case 2:
                     managerUser.addNewUser(creatUser());
-                    System.out.println("Tạo tài khoản thành công");
+                    System.out.println("TẠO TÀI KHOẢN THÀNH CÔNG");
                     break;
                 case 0:
                     System.exit(0);
@@ -81,6 +81,7 @@ public class MenuUser {
 
     private static User creatUser() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("ĐĂNG KÝ");
         System.out.print("Nhập tên đăng nhập: ");
         String user = scanner.nextLine();
         System.out.print("Nhập mật khẩu: ");
